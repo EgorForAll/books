@@ -1,0 +1,87 @@
+.catalog-container {
+  position: relative;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  margin: 0 50px;
+  @media (max-width: 575px) {
+    margin: 0 20px;
+  }
+}
+
+.not-found {
+  position: absolute;
+  font-size: 40px;
+  top: 50%;
+  left: 50%;
+  margin-left: -360px;
+  margin-bottom: 0;
+  color: #b6b6b6;
+}
+
+.catalog-subtitle {
+  margin: 0;
+}
+
+.books-list {
+  height: 100%;
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 50px;
+  display: grid;
+  @media (min-width: 320px) {
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 576px) {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+  }
+  @media (min-width: 992px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media (min-width: 1200px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+.book-card {
+  background-color: #eeeeee;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.pagination {
+  align-self: flex-start;
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin-top: 70px;
+}
+
+.page-item {
+  margin-right: 20px;
+}
+
+.page-item:last-child {
+  margin-right: 0;
+}
+
+.page-button {
+  width: 70px;
+  border-radius: 20px;
+  height: 70px;
+  font-size: 30px;
+  color: #fff;
+  border: none;
+  background-color: #bf9c75;
+  transition: opacity 0.3s ease;
+  &:hover {
+    opacity: 0.5;
+  }
+}
