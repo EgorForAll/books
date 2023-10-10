@@ -50,7 +50,7 @@
 
 .book-card {
   background-color: #eeeeee;
-  height: 400px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   padding: 30px;
@@ -84,4 +84,27 @@
   &:hover {
     opacity: 0.5;
   }
+}
+
+.image-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.book-title {
+  font-size: 18px;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.card-categories {
+  margin: 0;
+  margin-top: 15px;
+  color: #706f6f;
+  font-size: 18px;
+}
+
+.authors {
+  margin-top: 15px;
+  color: #7e674d;
 }

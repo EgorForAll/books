@@ -1,6 +1,7 @@
 import { IBook } from "../../models/IBook";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchBooks } from "./fetch-books";
+
 interface IState {
   books: IBook[];
   isLoading: boolean;
@@ -21,7 +22,7 @@ export const bookSlice = createSlice({
     [fetchBooks.fulfilled.type]: (state, action: PayloadAction<IBook[]>) => {
       state.isLoading = false;
       state.error = "";
-      state.books = action.payload.slice(0, 100);
+      state.books = action.payload;
     },
     [fetchBooks.pending.type]: (state) => {
       state.isLoading = true;

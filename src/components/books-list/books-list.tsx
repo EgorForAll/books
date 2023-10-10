@@ -8,8 +8,9 @@ interface BooksListTypes {
 }
 
 const BooksList: React.FC<BooksListTypes> = ({ books }) => {
+  console.log(books);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [booksPerPage] = useState<number>(12);
+  const [booksPerPage] = useState<number>(8);
 
   const lastBooksIndex = currentPage * booksPerPage;
   const firstUsersIndex = lastBooksIndex - booksPerPage;

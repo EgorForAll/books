@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { fetchBooks } from "../../store/reducers/fetch-books";
 import BooksList from "../books-list/books-list";
+import { IBook } from "../../models/IBook";
 
 const Catalog: React.FC = () => {
   const { books, isLoading, error } = useAppSelector(
