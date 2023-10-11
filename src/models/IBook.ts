@@ -30,9 +30,9 @@ interface IVolume {
     containsEpubBubbles: boolean;
     containsImageBubbles: boolean;
   };
-  imageLinks: {
+  imageLinks?: {
     smallThumbnail: string;
-    thumbnail: string;
+    thumbnail: string | undefined;
   };
   language: string;
   previewLink: string;

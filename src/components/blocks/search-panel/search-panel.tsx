@@ -3,22 +3,38 @@ import { bookSlice } from "../../../store/reducers/book-reducer";
 import { IRes } from "../../../models/IRes";
 import axios from "axios";
 import { useAppDispatch } from "../../../hooks/hooks";
-import { useFetcher, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+const CATEGORIES = [
+  "all",
+  "art",
+  "biography",
+  "computers",
+  "history",
+  "medical",
+  "poetry",
+];
 
 const SearchPanel: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const SearchBtnRef = useRef() as React.MutableRefObject<HTMLButtonElement>;
   const InputSearchRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const InputSortRef = useRef() as React.MutableRefObject<HTMLSelectElement>;
+  const InputCategoryRef =
+    useRef() as React.MutableRefObject<HTMLSelectElement>;
 
   const onSearchBook = async (value: string) => {
     navigate("/");
     const req = value.trim();
+    const sortType = InputSortRef.current.value;
+    const categoryType = InputCategoryRef.current.value;
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${req}${
+      categoryType !== "all" ? `+subject:${categoryType}` : ""
+    }&orderBy=${sortType}&key=AIzaSyBrJVr2PFFSi8XTtE4-8NuEwjzmj6kn8Mk`;
     try {
       dispatch(bookSlice.actions.fetchBooks());
-      const response = await axios.get<IRes>(
-        `https://www.googleapis.com/books/v1/volumes?q=${req}&key=AIzaSyBrJVr2PFFSi8XTtE4-8NuEwjzmj6kn8Mk`
-      );
+      const response = await axios.get<IRes>(url);
       dispatch(bookSlice.actions.fetchBooksSuccess(response.data.items));
     } catch (e) {
       dispatch(bookSlice.actions.fetchBooksError(e.message));
@@ -66,9 +82,13 @@ const SearchPanel: React.FC = () => {
               className="category-input ms-2 col-12 col-lg-5"
               id="category"
               name="category"
+              ref={InputCategoryRef}
             >
-              <option value="all">all</option>
-              <option value="non-fiction">non-fiction</option>
+              {CATEGORIES.map((item, index) => (
+                <option value={item} key={index}>
+                  {item}
+                </option>
+              ))}
             </select>
           </div>
           <div className="sorting-category col-5 col-lg-6">
@@ -76,12 +96,13 @@ const SearchPanel: React.FC = () => {
               Sorting by:
             </label>
             <select
+              ref={InputSortRef}
               className="sorting-input ms-2 col-12 col-lg-5"
               id="sorting"
               name="sorting"
             >
               <option value="relevance">relevance</option>
-              <option value="non-fiction">non-fiction</option>
+              <option value="newest">newest</option>
             </select>
           </div>
         </div>

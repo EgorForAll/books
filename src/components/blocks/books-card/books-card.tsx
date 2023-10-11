@@ -14,10 +14,12 @@ interface CustomLinkTypes {
 
 const BooksCard: React.FC<BooksCardTypes> = ({ book }) => {
   const dispatch = useAppDispatch();
-  const categories = book.volumeInfo.categories;
-  const imageUrl = book.volumeInfo.imageLinks.thumbnail;
-  const title = book.volumeInfo.title;
-  const authors = book.volumeInfo.authors;
+  const categories = book.volumeInfo?.categories;
+  const imageUrl = book.volumeInfo.imageLinks
+    ? book.volumeInfo.imageLinks.thumbnail
+    : undefined;
+  const title = book.volumeInfo?.title;
+  const authors = book.volumeInfo?.authors;
 
   const CustomLink: React.FC<CustomLinkTypes> = ({ path }) => {
     const onClickLink = () => dispatch(bookSlice.actions.setCurrentBook(book));
@@ -33,7 +35,9 @@ const BooksCard: React.FC<BooksCardTypes> = ({ book }) => {
   return (
     <div className="book-card">
       <div className="image-wrapper">
-        <img src={imageUrl} width={128} height={181} alt={title} />
+        {imageUrl ? (
+          <img src={imageUrl} width={128} height={181} alt={title} />
+        ) : null}
       </div>
       <div className="card-categories">
         {categories &&

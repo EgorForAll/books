@@ -3,7 +3,9 @@ import SearchPanel from "../blocks/search-panel/search-panel";
 
 const BookDesc = () => {
   const currentBook = useAppSelector((state) => state.bookReducer.currentBook);
-  const image = currentBook?.volumeInfo.imageLinks.thumbnail;
+  const image = currentBook?.volumeInfo.imageLinks
+    ? currentBook?.volumeInfo.imageLinks.thumbnail
+    : undefined;
   const categories = currentBook?.volumeInfo.categories;
   const title = currentBook?.volumeInfo.title;
   const authors = currentBook?.volumeInfo.authors;
