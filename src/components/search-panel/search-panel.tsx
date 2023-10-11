@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useRef } from "react";
+import { bookSlice } from "../../store/reducers/book-reducer";
+import { IRes } from "../../models/IRes";
+import axios from "axios";
+import { useAppDispatch } from "../../hooks/hooks";
 
 const SearchPanel: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const SearchBtnRef = useRef() as React.MutableRefObject<HTMLButtonElement>;
+  const InputSearchRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+
+  const onSearchBook = async (value: string) => {
+    const req = value.trim();
+    try {
+      dispatch(bookSlice.actions.fetchBooks());
+      const response = await axios.get<IRes>(
+        `https://www.googleapis.com/books/v1/volumes?q=${req}&key=AIzaSyBrJVr2PFFSi8XTtE4-8NuEwjzmj6kn8Mk`
+      );
+      dispatch(bookSlice.actions.fetchBooksSuccess(response.data.items));
+    } catch (e) {
+      dispatch(bookSlice.actions.fetchBooksError(e.message));
+    }
+  };
+
   return (
     <header>
       <div className="header-container col-10 col-sm-8 col-lg-6 d-flex flex-column align-items-center">
@@ -14,8 +35,14 @@ const SearchPanel: React.FC = () => {
             className="header-input col-11"
             id="search"
             name="search"
+            ref={InputSearchRef}
           />
-          <button className="search-button col-1"></button>
+          <button
+            onClick={() => onSearchBook(InputSearchRef.current.value)}
+            ref={SearchBtnRef}
+            type="button"
+            className="search-button col-1"
+          ></button>
         </div>
         <div className="sorting-field d-flex mt-4 col-12 justify-content-between">
           <div className="sorting-category col-5 col-lg-6">

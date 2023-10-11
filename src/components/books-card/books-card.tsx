@@ -16,14 +16,15 @@ const BooksCard: React.FC<BooksCardTypes> = ({ book }) => {
         <img src={imageUrl} width={128} height={181} alt={title} />
       </div>
       <div className="card-categories">
-        {categories && categories.map((item) => <span>{item}</span>)}
+        {categories &&
+          categories.map((item, index) => <span key={index}>{item}</span>)}
       </div>
       <h3 className="book-title">{title}</h3>
       {authors ? (
         <div className="authors">
           Авторы:{" "}
-          {authors.map((item) => (
-            <span>{item}</span>
+          {authors.map((item, index) => (
+            <span key={index}>{item}</span>
           ))}
         </div>
       ) : null}
