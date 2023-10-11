@@ -1,9 +1,4 @@
-import {
-  createReducer,
-  configureStore,
-  createSlice,
-  combineReducers,
-} from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import bookReducer from "./reducers/book-reducer";
 
 export const rootReducer = combineReducers({

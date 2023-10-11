@@ -1,10 +1,12 @@
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./components/app/App";
 import "./scss/main.scss";
 import React from "react";
 import { Provider } from "react-redux";
 import { setUpStore } from "./store/reducer";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import SearchingPage from "./components/pages/searching-page";
+import BookDesc from "./components/pages/books-desc";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -12,8 +14,19 @@ const root = ReactDOM.createRoot(
 
 const store = setUpStore();
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <SearchingPage />,
+  },
+  {
+    path: "/book/:id",
+    element: <BookDesc />,
+  },
+]);
+
 root.render(
   <Provider store={store}>
-    <App />
+    <RouterProvider router={router} />
   </Provider>
 );
