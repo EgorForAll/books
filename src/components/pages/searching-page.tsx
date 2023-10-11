@@ -1,6 +1,5 @@
-import React from "react";
-import SearchPanel from "../search-panel/search-panel";
-import Catalog from "../catalog/catalog";
+import SearchPanel from "../blocks/search-panel/search-panel";
+import Catalog from "../blocks/catalog/catalog";
 
 const SearchigPage = () => {
   return (

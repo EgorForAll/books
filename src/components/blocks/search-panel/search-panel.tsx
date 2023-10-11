@@ -1,15 +1,18 @@
-import React, { useRef } from "react";
-import { bookSlice } from "../../store/reducers/book-reducer";
-import { IRes } from "../../models/IRes";
+import React, { useRef, useEffect } from "react";
+import { bookSlice } from "../../../store/reducers/book-reducer";
+import { IRes } from "../../../models/IRes";
 import axios from "axios";
-import { useAppDispatch } from "../../hooks/hooks";
+import { useAppDispatch } from "../../../hooks/hooks";
+import { useFetcher, useNavigate } from "react-router-dom";
 
 const SearchPanel: React.FC = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const SearchBtnRef = useRef() as React.MutableRefObject<HTMLButtonElement>;
   const InputSearchRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   const onSearchBook = async (value: string) => {
+    navigate("/");
     const req = value.trim();
     try {
       dispatch(bookSlice.actions.fetchBooks());
@@ -21,6 +24,16 @@ const SearchPanel: React.FC = () => {
       dispatch(bookSlice.actions.fetchBooksError(e.message));
     }
   };
+
+  useEffect(() => {
+    const searchBook = (e: any) => {
+      if (e.code == "Enter" && InputSearchRef.current.value) {
+        onSearchBook(InputSearchRef.current.value);
+      }
+    };
+    document.addEventListener("keydown", searchBook);
+    return () => document.removeEventListener("keydown", searchBook);
+  }, []);
 
   return (
     <header>

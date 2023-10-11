@@ -1,6 +1,6 @@
 import React from "react";
-import { useAppSelector } from "../../hooks/hooks";
-import BooksList from "../books-list/books-list";
+import { useAppSelector } from "../../../hooks/hooks";
+import BooksList from "../../blocks/books-list/books-list";
 
 const Catalog: React.FC = () => {
   const { books, isLoading, error } = useAppSelector(

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import BooksCard from "../blocks/books-card/books-card";
-import { IBook } from "../../models/IBook";
-import Pagination from "../blocks/pagination/pagination";
+import BooksCard from "../books-card/books-card";
+import { IBook } from "../../../models/IBook";
+import Pagination from "../pagination/pagination";
 
 interface BooksListTypes {
   books: IBook[];

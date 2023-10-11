@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { IBook } from "../../models/IBook";
-import { useAppDispatch } from "../../hooks/hooks";
-import { bookSlice } from "../../store/reducers/book-reducer";
+import { IBook } from "../../../models/IBook";
+import { useAppDispatch } from "../../../hooks/hooks";
+import { bookSlice } from "../../../store/reducers/book-reducer";
 
 type BooksCardTypes = {
   book: IBook;

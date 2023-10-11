@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../hooks/hooks";
-import SearchPanel from "../search-panel/search-panel";
+import SearchPanel from "../blocks/search-panel/search-panel";
 
 const BookDesc = () => {
   const currentBook = useAppSelector((state) => state.bookReducer.currentBook);
@@ -30,7 +30,7 @@ const BookDesc = () => {
               <span key={index}>{item}</span>
             ))}
           </div>
-          <div className="desc">{description}</div>
+          {description?.length && <div className="desc">{description}</div>}
         </div>
       </section>
     </>
