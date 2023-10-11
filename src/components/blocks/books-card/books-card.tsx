@@ -33,7 +33,7 @@ const BooksCard: React.FC<BooksCardTypes> = ({ book }) => {
   };
 
   return (
-    <div className="book-card">
+    <div className="book-card animate__animated animate__slideInLeft">
       <div className="image-wrapper">
         {imageUrl ? (
           <img src={imageUrl} width={128} height={181} alt={title} />

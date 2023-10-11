@@ -29,7 +29,7 @@ const SearchPanel: React.FC = () => {
     const req = value.trim();
     const sortType = InputSortRef.current.value;
     const categoryType = InputCategoryRef.current.value;
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${req}${
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${req}&maxResults=40${
       categoryType !== "all" ? `+subject:${categoryType}` : ""
     }&orderBy=${sortType}&key=AIzaSyBrJVr2PFFSi8XTtE4-8NuEwjzmj6kn8Mk`;
     try {
@@ -43,13 +43,13 @@ const SearchPanel: React.FC = () => {
 
   useEffect(() => {
     const searchBook = (e: any) => {
-      if (e.code == "Enter" && InputSearchRef.current.value) {
+      if (e.code === "Enter" && InputSearchRef.current.value) {
         onSearchBook(InputSearchRef.current.value);
       }
     };
     document.addEventListener("keydown", searchBook);
     return () => document.removeEventListener("keydown", searchBook);
-  }, []);
+  });
 
   return (
     <header>

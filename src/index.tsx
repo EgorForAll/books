@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import "animate.css";
 import "./scss/main.scss";
 import React from "react";
 import { Provider } from "react-redux";

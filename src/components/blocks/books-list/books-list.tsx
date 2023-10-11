@@ -12,17 +12,21 @@ const BooksList: React.FC<BooksListTypes> = ({ books }) => {
   const [booksPerPage] = useState<number>(8);
 
   const lastBooksIndex = currentPage * booksPerPage;
-  const firstUsersIndex = lastBooksIndex - booksPerPage;
-  const currentBooks = books.slice(firstUsersIndex, lastBooksIndex);
+  const currentBooks = books.slice(0, lastBooksIndex);
   const togglePage = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  const disabledBtn = () => lastBooksIndex > books.length;
   return (
     <>
+      <div className="mt-5">По вашему запросу найдено книг: {books.length}</div>
       <div className="books-list col-12">
         {currentBooks.map((item, index) => (
           <BooksCard key={index} book={item} />
         ))}
       </div>
       <Pagination
+        disabledBtn={disabledBtn}
+        currentPage={currentPage}
         booksPerPage={booksPerPage}
         totalBooks={books.length}
         togglePage={togglePage}

@@ -4,36 +4,31 @@ interface PaginationTypes {
   booksPerPage: number;
   totalBooks: number;
   togglePage: (number: number) => void;
+  currentPage: number;
+  disabledBtn: () => boolean;
 }
 
 const Pagination: React.FC<PaginationTypes> = ({
   booksPerPage,
   totalBooks,
   togglePage,
+  currentPage,
+  disabledBtn,
 }) => {
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalBooks / booksPerPage); i++) {
     pageNumbers.push(i);
   }
 
-  const onClickPagination = (number: number) => {
-    togglePage(number);
-    window.scrollTo(0, 0);
-  };
   return (
     <div>
-      <ul className="pagination">
-        {pageNumbers.map((number) => (
-          <li className="page-item" key={number}>
-            <button
-              className="page-button"
-              onClick={() => onClickPagination(number)}
-            >
-              {number}
-            </button>
-          </li>
-        ))}
-      </ul>
+      <button
+        className="page-button"
+        onClick={() => togglePage(currentPage + 1)}
+        disabled={disabledBtn()}
+      >
+        Load more
+      </button>
     </div>
   );
 };
